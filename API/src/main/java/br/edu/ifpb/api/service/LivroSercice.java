@@ -17,5 +17,10 @@ public interface LivroSercice {
     void salvar(Livro livro);
 
     List<Livro> todos();
-    
+
+    public Livro localizarPorId(int id);
+
+    public void remove(Livro livro);
+
+    public Livro update(Livro entity);
 }

@@ -29,4 +29,19 @@ public class LivroSerciceImp implements LivroSercice {
         
         return list;
  }
+
+    @Override
+    public Livro localizarPorId(int id) {
+       return this.rl.find(Livro.class, Integer.valueOf(id));
+    }
+
+    @Override
+    public void remove(Livro livro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Livro update(Livro entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

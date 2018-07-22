@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -40,6 +41,22 @@ public class ResourceLivro {
 //                .header("Access-Control-Allow-Origin", "*")
                 .entity(entity)
                 .build();
+    }
+      @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response produtosPorId(
+            @PathParam("id") int id) {
+
+        Livro produto = sercice.localizarPorId(id);
+        if (produto == null) {
+            return Response.noContent().build();
+        }
+
+        return Response.ok() //200
+                .entity(produto)
+                .build();
+
     }
    
 }

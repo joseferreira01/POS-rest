@@ -24,7 +24,7 @@ public class Livro implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String edicao;
     private String titulo;
     private String descricao;
