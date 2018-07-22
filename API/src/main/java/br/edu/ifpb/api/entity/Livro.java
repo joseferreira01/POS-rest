@@ -11,6 +11,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,8 +29,7 @@ public class Livro implements Serializable {
     private String edicao;
     private String titulo;
     private String descricao;
-    @OneToMany
-    @ElementCollection
+    @ManyToMany
     private List<Autor> autores;
 
     public Livro() {
