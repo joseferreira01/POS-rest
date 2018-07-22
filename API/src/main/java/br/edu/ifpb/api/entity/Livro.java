@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.api;
+package br.edu.ifpb.api.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author jose
  */
+@XmlRootElement
 @Entity
 public class Livro implements Serializable {
 
@@ -24,13 +28,15 @@ public class Livro implements Serializable {
     private String edicao;
     private String titulo;
     private String descricao;
+    @OneToMany
+    @ElementCollection
     private List<Autor> autores;
 
     public Livro() {
     }
 
-    public Livro( String edicao, String titulo, String descricao, List<Autor> autores) {
-        
+    public Livro(String edicao, String titulo, String descricao, List<Autor> autores) {
+
         this.edicao = edicao;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -43,6 +49,14 @@ public class Livro implements Serializable {
         this.titulo = titulo;
         this.descricao = descricao;
         this.autores = autores;
+    }
+
+    public void addAutor(Autor autor) {
+        this.autores.add(autor);
+    }
+
+    public void removeAutor(Autor autor) {
+        this.autores.remove(autor);
     }
 
     public int getId() {
@@ -109,7 +123,5 @@ public class Livro implements Serializable {
         }
         return true;
     }
-    
-    
 
 }
