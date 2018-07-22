@@ -5,7 +5,9 @@
  */
 package br.edu.ifpb.api.repositorio;
 
+import br.edu.ifpb.api.entity.Livro;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -43,7 +45,14 @@ public class RepositorioImpl<T, KEY> implements Repositorio<T, KEY> {
     }
 
     @Override
-    public void remove(T entity) {
-        em.remove(entity);
+    public T remove(T entity) {
+         Optional<T> of = Optional.of(entity);
+        try {
+            em.remove(entity);
+           
+            
+        } catch (Exception e) {
+        }
+        return of.get();
     }
 }

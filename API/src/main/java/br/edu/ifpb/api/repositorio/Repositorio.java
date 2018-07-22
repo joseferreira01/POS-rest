@@ -5,6 +5,7 @@
  */
 package br.edu.ifpb.api.repositorio;
 
+import br.edu.ifpb.api.entity.Livro;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public interface Repositorio<T, KEY> {
 
     List<T> list(Class<T> tipo);
 
-    void remove(T entity);
+    T remove(T entity);
 
     void salvar(T entity);
 

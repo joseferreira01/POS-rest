@@ -20,7 +20,7 @@ public interface LivroSercice {
 
     public Livro localizarPorId(int id);
 
-    public void remove(Livro livro);
+    public Livro remove(int id);
 
     public Livro update(Livro entity);
 }

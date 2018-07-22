@@ -10,6 +10,7 @@ import br.edu.ifpb.api.service.LivroSercice;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -38,7 +39,7 @@ public class ResourceLivro {
         };
 
         return Response.ok()
-//                .header("Access-Control-Allow-Origin", "*")
+//                
                 .entity(entity)
                 .build();
     }
@@ -57,6 +58,14 @@ public class ResourceLivro {
                 .entity(produto)
                 .build();
 
+    }
+    @DELETE
+    @Path("{id}")
+    public Response removerLivro(@PathParam("id") int id) {
+        Livro livro = sercice.remove(id);
+        return Response.ok() // 200
+                .entity(livro)
+                .build();
     }
    
 }

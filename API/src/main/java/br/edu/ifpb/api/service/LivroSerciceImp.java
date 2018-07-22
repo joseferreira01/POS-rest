@@ -36,12 +36,13 @@ public class LivroSerciceImp implements LivroSercice {
     }
 
     @Override
-    public void remove(Livro livro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Livro remove(int id) {
+        Livro livro = localizarPorId(id);
+    return this.rl.remove(livro);
     }
 
     @Override
-    public Livro update(Livro entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Livro update(Livro livro) {
+        return this.rl.update(livro);
     }
 }
