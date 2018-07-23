@@ -5,8 +5,9 @@
  */
 package br.edu.ifpb.api.entity.resource;
 
+import br.edu.ifpb.api.entity.Autor;
 import br.edu.ifpb.api.entity.Livro;
-import br.edu.ifpb.api.service.LivroSercice;
+import br.edu.ifpb.api.service.AutorSercice;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -27,20 +28,20 @@ import javax.ws.rs.core.Response;
  *
  * @author jose
  */
-@Path("livro")
+@Path("autor")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Stateless
-public class ResourceLivro {
+public class ResourceAutor {
 
     @EJB
-    private LivroSercice sercice;
+    private AutorSercice sercice;
 
     @GET
     public Response recuperarTodos() {
-        List<Livro> livros = sercice.todos();
+        List<Autor> atores = sercice.todos();
 
-        GenericEntity<List<Livro>> entity
-                = new GenericEntity<List<Livro>>(livros) {
+        GenericEntity<List<Autor>> entity
+                = new GenericEntity<List<Autor>>(atores) {
         };
 
         return Response.ok()
@@ -52,10 +53,10 @@ public class ResourceLivro {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response AutorPorId(
+    public Response autorPorId(
             @PathParam("id") int id) {
 
-        Livro autor = sercice.localizarPorId(id);
+        Autor autor = sercice.localizarPorId(id);
         if (autor == null) {
             return Response.noContent().build();
         }
@@ -69,9 +70,9 @@ public class ResourceLivro {
     @DELETE
     @Path("{id}")
     public Response removerLivro(@PathParam("id") int id) {
-        Livro livro = sercice.remove(id);
+        Autor autor = sercice.remove(id);
         return Response.ok() // 200
-                .entity(livro)
+                .entity(autor)
                 .build();
     }
 
@@ -79,33 +80,34 @@ public class ResourceLivro {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response novaLivro(JsonObject json) {
-        Livro livro = new Livro(json.getString("editora"),
-                json.getString("titulo"),
-                json.getString("descricao"), null);
-        sercice.salvar(livro);
+        Autor autor = new Autor(json.getString("email"),
+                json.getString("nome"),
+                json.getString("abreviacao"));
+        sercice.salvar(autor);
 
-        if (livro == null) {
+        if (autor == null) {
             return Response.noContent().build();
         }
         return Response.ok() //200
-                .entity(livro)
+                .entity(autor)
                 .build();
     }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response editaLivro(JsonObject json) {
-        Livro livro = new Livro(json.getInt("id")
-                ,json.getString("editora"),
-                json.getString("titulo"),
-                json.getString("descricao"), null);
-        sercice.update(livro);
+        Autor autor = new Autor(json.getInt("id"),
+                json.getString("email"),
+                json.getString("nome"),
+                json.getString("abreviacao"));
+        sercice.update(autor);
 
-        if (livro == null) {
+        if (autor == null) {
             return Response.noContent().build();
         }
         return Response.ok() //200
-                .entity(livro)
+                .entity(autor)
                 .build();
     }
 

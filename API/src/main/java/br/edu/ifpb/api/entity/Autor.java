@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Autor implements Serializable{
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String email;
     private String nome;
     private String abreviacao;
@@ -30,6 +30,12 @@ public class Autor implements Serializable{
 
     public Autor(int id, String email, String nome, String abreviacao) {
         this.id = id;
+        this.email = email;
+        this.nome = nome;
+        this.abreviacao = abreviacao;
+    }
+    public Autor( String email, String nome, String abreviacao) {
+        
         this.email = email;
         this.nome = nome;
         this.abreviacao = abreviacao;
